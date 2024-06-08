@@ -28,10 +28,8 @@ def find_all_non_py_files(directory):
             continue
         for file in files:
             if not file.endswith('.py'):
-                # Remove the base directory path from the file path
-                relative_path = os.path.relpath(os.path.join(root, file), directory)
                 # Normalize the path
-                a=relative_path.split("\\")
+                a=root.split("\\")
                 new=""
                 for i, j in enumerate(a):
                     if i>0:
@@ -39,7 +37,7 @@ def find_all_non_py_files(directory):
                     else:
                         new+=j
 
-                non_py_files.append(new)
+                non_py_files.append(eval(f'''("{new}","{file}")'''))
     return non_py_files
 
 # Specify the directory to search
